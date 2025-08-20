@@ -1,7 +1,7 @@
 const http=require('http');
 const { url } = require('inspector');
 const server=http.createServer((req,res)=>{
-  //  console.log(req.url,req.method,req.headers);
+   console.log(req.url,req.method);
   if(req.url=='/'){
     res.setHeader('Content-Type','text/html');
   res.write('<html>');
@@ -16,7 +16,7 @@ const server=http.createServer((req,res)=>{
   res.write('<button type="submit" value="submit"> submit</button>')
   res.write('</form>');
   res.write('</html>');
-  res.end();
+  return res.end();
   }
   else if (req.url=='/product'){
     res.setHeader('Content-Type','text/html');
@@ -26,6 +26,7 @@ const server=http.createServer((req,res)=>{
   res.write('</html>');
   res.end();
   }
+  res.setHeader('Loaction','/')
   
   //process.exit(); //stop event loop
 });
