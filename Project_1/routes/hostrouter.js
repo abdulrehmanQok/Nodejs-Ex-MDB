@@ -1,18 +1,14 @@
 const express=require('express');
+const path=require('path');
 const hostrouter=express.Router();
+const routdir=require('../utils/path_util');
+
 
 hostrouter.get("/add-home",(req,res,next)=>{
-  res.send(`<h1> Register your hoome</h1>
-    <form action="/host/add-home" method="POST">
-    <input type="text" name="add-home" placeholder="Enter your home"/>
-    <input type="submit"/>
-    </form>
-    `)
+  res.sendFile(path.join(routdir,'view','add_home.html'));
 })
 hostrouter.post("/add-home",(req,res,next)=>{
   console.log(req.body);
-  res.send(`<h1>home register successfully</h1>
-    <a href="/"> Go back</a>
-    `)
+  res.sendFile(path.join(routdir,'view','register_successfuly.html'));
 })
 module.exports=hostrouter;

@@ -1,6 +1,8 @@
 const express =require('express');
 const userrouter=require('./routes/userrouter');
 const hostrouter=require('./routes/hostrouter');
+const path=require('path');
+const routdir=require('./utils/path_util');
 
 const app=express();
 app.use((req,res,next)=>{
@@ -11,7 +13,7 @@ app.use(express.urlencoded());
 app.use(userrouter);
 app.use("/host",hostrouter);
 app.use((req,res,next)=>{
-  res.status(404).send(`<h1>Page not found 404</h1>`)
+  res.status(404).sendFile(path.join(routdir,'view','404.html'));
 })
 PORT=3000;
 app.listen(PORT,()=>{
