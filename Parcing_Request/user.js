@@ -1,3 +1,4 @@
+const { error } = require('console');
 const fs = require('fs');
 const request_handler=(req, res) => {
   console.log(req.url, req.method);
@@ -32,18 +33,23 @@ const request_handler=(req, res) => {
             const params= new URLSearchParams(buffer_data);
             const body_obj=Object.fromEntries(params);
             console.log(body_obj);
-            fs.writeFileSync('user.txt', JSON.stringify(body_obj));
+            fs.writeFile('user.txt', JSON.stringify(body_obj),error=>{
+              res.statusCode = 302;
+            res.setHeader('Location', '/');
+            return res.end();
 
+            });
           })
-    res.statusCode = 302;
-    res.setHeader('Location', '/');
+    
   }
+  else{
   res.setHeader('Content-Type', 'text/html');
   res.write('<html>');
   res.write('<head><title>Complete Coding</title></head>');
   res.write('<body><h1>Like / Share / Subscribe</h1></body>');
   res.write('</html>');
   res.end();
+  }
 };
 
 
