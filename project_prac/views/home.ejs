@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page Airbnb</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 20px; }
+      h1 { color: #333; }
+      ul { list-style-type: disc; padding-left: 20px; }
+      li { margin-bottom: 10px; }
+      .house-item {
+        background: #f3f3f3;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Welcome to Airbnb</h1>
+
+    <a href="/host/add-home">Add Home</a>
+
+    <h2>Available Homes</h2>
+    <% register.forEach(home => { %>
+  <li class="house-item">
+    <%= home.houseName %>
+  </li>
+<% }) %>
+
+  </body>
+</html>

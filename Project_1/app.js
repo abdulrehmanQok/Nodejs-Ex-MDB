@@ -1,21 +1,29 @@
-const express =require('express');
-const userrouter=require('./routes/userrouter');
-const hostrouter=require('./routes/hostrouter');
-const path=require('path');
-const routdir=require('./utils/path_util');
+// Core Module
+const path = require('path');
 
-const app=express();
-app.use((req,res,next)=>{
-  console.log(req.url,req.method);
-  next();
-})
+// External Module
+const express = require('express');
+
+//Local Module
+const userRouter = require("./routes/userRouter")
+const {hostRouter} = require("./routes/hostRouter")
+const rootDir = require("./utils/pathUtil");
+const home_controller=require('../Project_1/controllers/home')
+
+const app = express();
+
+app.set('view engine', 'ejs');
+app.set('views', 'views');
+
 app.use(express.urlencoded());
-app.use(userrouter);
-app.use("/host",hostrouter);
-app.use((req,res,next)=>{
-  res.status(404).sendFile(path.join(routdir,'view','404.html'));
-})
-PORT=3000;
-app.listen(PORT,()=>{
-  console.log(`server running on PORT http://localhost:${PORT}`);
-})
+app.use(userRouter);
+app.use("/host", hostRouter);
+
+app.use(express.static(path.join(rootDir, 'public')))
+
+app.use(home_controller.error)
+
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on address http://localhost:${PORT}`);
+});

@@ -1,14 +1,12 @@
-const express=require('express');
-const path=require('path');
-const hostrouter=express.Router();
-const routdir=require('../utils/path_util');
 
+const express = require('express');
+const hostRouter = express.Router();
 
-hostrouter.get("/add-home",(req,res,next)=>{
-  res.sendFile(path.join(routdir,'view','add_home.html'));
-})
-hostrouter.post("/add-home",(req,res,next)=>{
-  console.log(req.body);
-  res.sendFile(path.join(routdir,'view','register_successfuly.html'));
-})
-module.exports=hostrouter;
+// Local Module
+const home_controller= require('../controllers/home')
+
+hostRouter.get("/add-home",home_controller.get_add_home);
+
+hostRouter.post("/add-home", home_controller.post_home_added)
+
+exports.hostRouter = hostRouter;
